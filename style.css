@@ -22,10 +22,21 @@ button {
     border-radius: 4px;
 }
 
-button:hover {
-    background-color: #0057b37a;
+#fetchBtn {
+    background-color: #25609e;
 }
 
+#fetchBtn:hover {
+    background-color: #394552;
+}
+
+#xhrBtn {
+    background-color: #25609e;
+}
+
+#xhrBtn:hover {
+    background-color: #394552;
+}
 
 form {
     margin-top: 10px;
@@ -50,4 +61,14 @@ input, textarea {
     border-radius: 6px;
     border: 1px solid #ccc;
     box-shadow: 3px 3px #0057b373;
+}
+
+
+@media (max-width: 600px) {
+    body {
+        margin: 10px;
+    }
+    button {
+        width: 100%;
+    }
 }
