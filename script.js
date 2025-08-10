@@ -1,5 +1,6 @@
 document.getElementById('fetchBtn').addEventListener('click', getFetch);
 document.getElementById('xhrBtn').addEventListener('click', getDataXHR);
+document.getElementById('postForm').addEventListener('submit', sendPost);
 
 //Part1
 function getFetch() {
@@ -39,4 +40,31 @@ function getDataXHR() {
         document.getElementById('output').innerHTML = `<p style="color:red;">Network Error</p>`;
     };
     xhr.send();
+}
+
+
+//PART 3
+function sendPost(e) {
+    e.preventDefault();
+    const title = document.getElementById('postTitle').value;
+    const body = document.getElementById('postBody').value;
+
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, body })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error('POST request failed');
+            return res.json();
+        })
+        .then(data => {
+            document.getElementById('response').innerHTML = `
+                <p style="color:green;">POST successful!</p>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+        })
+        .catch(err => {
+            document.getElementById('response').innerHTML = `<p style="color:red;">${err}</p>`;
+        });
 }
