@@ -1,9 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Vibur&display=swap');
+
+
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f7f7f7;
+    margin: 200px;
+    background-color: #161616;
 }
 
 h1, h2 {
-    color: #333;
+    color: #79aad8;
+    font-family: "Vibur";
+}
+
+button {
+    padding: 8px 14px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #0057b37a;
+}
+
+
+form {
+    margin-top: 10px;
+    background: white;
+    padding: 40px;
+    border-radius: 6px;
+    box-shadow: 3px 3px #0057b38f;
+    color: black;
+}
+
+input, textarea {
+    display: block;
+    width: 100%;
+    margin: 6px 0;
+    padding: 6px;
+}
+
+#output, #response {
+    margin-top: 15px;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px #0057b373;
 }
