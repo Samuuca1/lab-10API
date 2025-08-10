@@ -2,7 +2,7 @@ document.getElementById('fetchBtn').addEventListener('click', getFetch);
 
 
 //Part1
-function getFeetch() {
+function getFetch() {
     fetch('https://jsonplaceholder.typicode.com/posts/1')
         .then(res => {
             if (!res.ok) throw new Error('Fetch request failed');
