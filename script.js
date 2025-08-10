@@ -2,6 +2,7 @@ document.getElementById('fetchBtn').addEventListener('click', getFetch);
 document.getElementById('xhrBtn').addEventListener('click', getDataXHR);
 document.getElementById('formPOST').addEventListener('submit', sendPost);
 document.getElementById('formPUT').addEventListener('submit', updatePut);
+document.getElementById('formDelete').addEventListener('submit', deletePost);
 
 //Part1
 function getFetch() {
@@ -99,4 +100,26 @@ function updatePut(e) {
     };
 
     xhr.send(JSON.stringify({ title, body }));
+}
+
+function deletePost(e) {
+    e.preventDefault();
+    const id = document.getElementById('deleteId').value;
+
+    if (!id) {
+        document.getElementById('response').innerHTML = showError('Please enter a Post ID to delete', 'input');
+        return;
+    }
+
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, { method: 'DELETE' })
+        .then(res => {
+            if (res.status === 200) {
+                document.getElementById('response').innerHTML = `<p style="color:green;">Post with ID ${id} deleted successfully!</p>`;
+            } else {
+                throw new Error('Server error during DELETE');
+            }
+        })
+        .catch(err => {
+            document.getElementById('response').innerHTML = showError(err.message, 'server');
+        });
 }
