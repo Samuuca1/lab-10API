@@ -1,6 +1,7 @@
 document.getElementById('fetchBtn').addEventListener('click', getFetch);
 document.getElementById('xhrBtn').addEventListener('click', getDataXHR);
-document.getElementById('postForm').addEventListener('submit', sendPost);
+document.getElementById('formPOST').addEventListener('submit', sendPost);
+document.getElementById('formPUT').addEventListener('submit', updatePut);
 
 //Part1
 function getFetch() {
@@ -67,4 +68,35 @@ function sendPost(e) {
         .catch(err => {
             document.getElementById('response').innerHTML = `<p style="color:red;">${err}</p>`;
         });
+}
+
+
+//Ppart 4
+function updatePut(e) {
+    e.preventDefault();
+    const id = document.getElementById('putId').value;
+    const title = document.getElementById('putTitle').value;
+    const body = document.getElementById('putBody').value;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', `https://jsonplaceholder.typicode.com/posts/${id}`);
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            const data = JSON.parse(xhr.responseText);
+            document.getElementById('response').innerHTML = `
+                <p style="color:green;">PUT successful!</p>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+        } else {
+            document.getElementById('response').innerHTML = `<p style="color:red;">PUT request failed</p>`;
+        }
+    };
+
+    xhr.onerror = function() {
+        document.getElementById('response').innerHTML = `<p style="color:red;">Network Error</p>`;
+    };
+
+    xhr.send(JSON.stringify({ title, body }));
 }
